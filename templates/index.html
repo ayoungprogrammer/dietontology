@@ -1,0 +1,160 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+
+<body>
+    <div class="progress">
+        <form id="foodForm" action="/" method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Food Groups</legend>
+
+                <div>
+                  <input type="radio" id="all" name="foodGroups" value="all" {% if data.form.foodGroups == "all" %} checked {% endif %}>
+                  <label for="all">All</label>
+                </div>
+
+                <div>
+                  <input type="radio" id="dairy" name="foodGroups" value="dairy" {% if data.form.foodGroups == "dairy" %} checked {% endif %}>
+                  <label for="dairy">Dairy</label>
+                </div>
+
+                <div>
+                  <input type="radio" id="fruits" name="foodGroups" value="fruits" {% if data.form.fruits == "fruits" %}checked {% endif %}>
+                  <label for="fruits">Fruits</label>
+                </div>
+                
+                  <div>
+                    <input type="radio" id="grains" name="foodGroups" value="grains" 
+                    {% if data.form.foodGroups == "grains" %} 
+                    checked 
+                    {% endif %}>
+                    <label for="grains">Grains</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="proteins" name="foodGroups" value="proteins" 
+                    {% if data.form.foodGroups == "proteins" %} 
+                    checked 
+                    {% endif %}>
+                    <label for="proteins">Proteins</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="vegetables" name="foodGroups" value="vegetables" 
+                    {% if data.form.foodGroups == "vegetables" %} 
+                    checked 
+                    {% endif %}>
+                    <label for="vegetables">Vegetables</label>
+                  </div>
+                </fieldset>
+            </fieldset>
+            <fieldset>
+                  <legend>Food Restrictions</legend>
+                  <div>
+                    <input type="checkbox" id="vegan" name="vegan" {% if data.form.vegan %}checked{% endif %}>
+                    <label for="vegan">Vegan</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="vegetarian" name="vegetarian" {% if data.form.vegetarian %}checked{% endif %}>
+                    <label for="vegetarian">Vegetarian</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="pescetarian" name="pescetarian" {% if data.form.pescetarian %}checked{% endif %}>
+                    <label for="pescetarian">Pescetarian</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="gluten_free" name="gluten_free" {% if data.form.gluten_free %}checked{% endif %}>
+                    <label for="gluten_free">Gluten Free</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="lactose_intolerant" name="lactose_intolerant" {% if data.form.lactose_intolerant %}checked{% endif %}>
+                    <label for="lactose_intolerant">Lactose Free</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="cholestrol_restricted" name="cholestrol_restricted" {% if data.form.cholestrol_restricted %}checked{% endif %}>
+                    <label for="cholestrol_restricted">Cholestrol Restricted</label>
+                  </div>
+            </fieldset>
+            <fieldset>
+                <legend>Allergies</legend>
+                <div>
+                    <input type="checkbox" id="tree_nut_allergy" name="tree_nut_allergy"
+                    {% if data.form.tree_nut_allergy %}
+                        checked
+                    {% endif %}
+                    >
+                    <label for="tree_nut_allergy">Tree Nut Allergy</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="peanut_allergy" name="peanut_allergy"
+                    {% if data.form.peanut_allergy %}
+                        checked
+                    {% endif %}
+                    >
+                    <label for="peanut_allergy">Peanut Allergy</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="crustacean_allergy" name="crustacean_allergy"
+                    {% if data.form.crustacean_allergy %}
+                        checked
+                    {% endif %}
+                    >
+                    <label for="crustacean_allergy">Crustacean Allergy</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="soybeans_allergy" name="soybeans_allergy"
+                    {% if data.form.soybeans_allergy %}
+                        checked
+                    {% endif %}
+                    >
+                    <label for="soybeans_allergy">Soybeans Allergy</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="wheat_allergy" name="wheat_allergy"
+                    {% if data.form.wheat_allergy %}
+                        checked
+                    {% endif %}
+                    >
+                    <label for="wheat_allergy">Wheat Allergy</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="egg_allergy" name="egg_allergy"
+                    {% if data.form.egg_allergy %}
+                        checked
+                    {% endif %}
+                    >
+                    <label for="wheat_allergy">Egg Allergy</label>
+                </div>
+            </fieldset>
+
+            <div id="loading" class="hidden">
+              <div class="spinner"></div>
+            </div>
+
+            <input id="submitBtn" type="submit" />
+            
+        </form>
+
+        {% if data is defined %}
+        <ul>
+        {% for food in data.foods %}
+            <li>{{ food }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+</body>
+
+<script>
+    const myForm = document.getElementById('foodForm');
+const submitBtn = document.getElementById('submitBtn');
+const loading = document.getElementById('loading');
+
+myForm.addEventListener('submit', (event) => {
+  loading.classList.remove('hidden');
+  submitBtn.disabled = true;
+});
+</script>
+
+</html>
